@@ -18,12 +18,82 @@ declare module '@mui/material/styles' {
 
 const theme = createTheme({
   trello: {
-    appBarHeight: '48px',
-    boardBarHeight: '56px',
+    appBarHeight: '56px',
+    boardBarHeight: '64px',
   },
   colorSchemes: {
-    dark: {},
     light: {},
+    dark: {},
+  },
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: (theme) => ({
+        body: {
+          // Firefox scrollbar
+          scrollbarColor: `${theme.palette.action.disabled} ${theme.palette.background.default}`,
+
+          // Chrome/Safari scrollbar
+          '&::-webkit-scrollbar': {
+            width: 4,
+            height: 4,
+          },
+          '&::-webkit-scrollbar-thumb': {
+            backgroundColor: theme.palette.action.disabled,
+            borderRadius: 4,
+          },
+          '&::-webkit-scrollbar-thumb:hover': {
+            backgroundColor: theme.palette.action.hover,
+          },
+        },
+      }),
+    },
+
+    // Button components
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          fontSize: '0.875rem',
+          textTransform: 'none',
+          fontWeight: 500,
+        },
+      },
+    },
+
+    // Input components
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          fontSize: '0.875rem',
+          '& .MuiOutlinedInput-notchedOutline': {
+            borderColor: theme.palette.divider,
+          },
+          '&:hover .MuiOutlinedInput-notchedOutline': {
+            borderColor: theme.palette.primary.main,
+          },
+          '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+            borderColor: theme.palette.primary.main,
+          },
+        }),
+      },
+    },
+
+    MuiInputLabel: {
+      styleOverrides: {
+        root: {
+          fontSize: '0.875rem',
+        },
+      },
+    },
+
+    // Menu components
+    MuiMenuItem: {
+      styleOverrides: {
+        root: {
+          fontSize: '0.875rem',
+          minHeight: 42,
+        },
+      },
+    },
   },
 })
 
