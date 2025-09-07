@@ -66,12 +66,13 @@ const theme = createTheme({
           fontSize: '0.875rem',
           '& .MuiOutlinedInput-notchedOutline': {
             borderColor: theme.palette.divider,
+            borderWidth: '1px',
           },
-          '&:hover .MuiOutlinedInput-notchedOutline': {
-            borderColor: theme.palette.primary.main,
+          '&:hover:not(.Mui-focused) .MuiOutlinedInput-notchedOutline': {
+            borderWidth: '2px',
           },
           '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-            borderColor: theme.palette.primary.main,
+            borderWidth: '2px',
           },
         }),
       },

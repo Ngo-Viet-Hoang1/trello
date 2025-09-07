@@ -32,7 +32,10 @@ export default function Views() {
     <div>
       <Tooltip title="Views">
         <ClickAwayListener onClickAway={() => setOpen(false)}>
-          <IconButton onClick={handleClick} sx={{ borderRadius: 1 }}>
+          <IconButton
+            onClick={handleClick}
+            sx={{ borderRadius: 1, color: 'white' }}
+          >
             <ListItemIcon />
             <ExpandMoreIcon fontSize="small" />
           </IconButton>

@@ -1,12 +1,15 @@
+import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt'
 import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
-import Views from './Views'
+import { useState } from 'react'
 import Avatars from './Avatars'
 import Menus from './Menus'
-import IconButton from '@mui/material/IconButton'
-import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt'
+import Views from './Views'
 
 function BoardBar() {
+  const [boardTitle, setBoardTitle] = useState('Untitled')
+
   return (
     <Box
       sx={{
@@ -19,6 +22,7 @@ function BoardBar() {
         boxSizing: 'border-box',
         overflowX: 'auto',
         borderTop: '1px solid #A6C5E229',
+        bgcolor: '#005c91',
       }}
     >
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
@@ -27,30 +31,34 @@ function BoardBar() {
           id="filled-hidden-label-small"
           size="small"
           sx={{
-            '& .MuiInputBase-input': { textAlign: 'center' },
-            '& fieldset': { border: 'none' },
-            '&:hover fieldset': { bgcolor: 'rgba(0, 0, 0, 0.1)' },
+            '& .MuiInputBase-input': {
+              textAlign: 'center',
+              color: 'white',
+            },
           }}
-          value={'Untitled'}
+          value={boardTitle}
+          onChange={(e) => setBoardTitle(e.target.value)}
+          inputProps={{
+            style: {
+              width: `${Math.max(8, boardTitle.length)}ch`,
+              minWidth: '50px',
+            },
+          }}
         />
         <Views />
       </Box>
 
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
         <Avatars />
-        <IconButton
-          sx={{
-            fontSize: 14,
-            borderRadius: 1,
-            bgcolor: '#DCDFE4',
-            color: 'text.primary',
-            px: 2,
-            gap: 1,
-          }}
+
+        <Button
+          variant="contained"
+          size="small"
+          sx={{ display: 'flex', gap: 1, fontSize: 13 }}
         >
           <PersonAddAltIcon fontSize="small" />
           Share
-        </IconButton>
+        </Button>
         <Menus />
       </Box>
     </Box>
