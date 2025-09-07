@@ -5,6 +5,7 @@ declare module '@mui/material/styles' {
     trello: {
       appBarHeight: string
       boardBarHeight: string
+      boardContentHeight: string
     }
   }
   // allow configuration using `createTheme()`
@@ -12,14 +13,20 @@ declare module '@mui/material/styles' {
     trello?: {
       appBarHeight?: string
       boardBarHeight?: string
+      boardContentHeight?: string
     }
   }
 }
 
+const APP_BAR_HEIGHT = '56px'
+const BOARD_BAR_HEIGHT = '64px'
+const BOARD_CONTENT_HEIGHT = `calc(100vh - ${APP_BAR_HEIGHT} - ${BOARD_BAR_HEIGHT})`
+
 const theme = createTheme({
   trello: {
-    appBarHeight: '56px',
-    boardBarHeight: '64px',
+    appBarHeight: APP_BAR_HEIGHT,
+    boardBarHeight: BOARD_BAR_HEIGHT,
+    boardContentHeight: BOARD_CONTENT_HEIGHT,
   },
   colorSchemes: {
     light: {},
@@ -92,6 +99,16 @@ const theme = createTheme({
         root: {
           fontSize: '0.875rem',
           minHeight: 42,
+        },
+      },
+    },
+
+    MuiTypography: {
+      styleOverrides: {
+        root: {
+          '&.MuiTypography-body1': {
+            fontSize: '0.875rem',
+          },
         },
       },
     },

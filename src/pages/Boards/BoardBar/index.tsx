@@ -35,6 +35,18 @@ function BoardBar() {
               textAlign: 'center',
               color: 'white',
             },
+            '& .MuiOutlinedInput-root': {
+              '& fieldset': {
+                border: 'none',
+              },
+              '&:hover fieldset': {
+                border: 'none',
+              },
+              '&.Mui-focused fieldset': {
+                border: '2px solid ',
+                borderColor: 'primary.main',
+              },
+            },
           }}
           value={boardTitle}
           onChange={(e) => setBoardTitle(e.target.value)}
