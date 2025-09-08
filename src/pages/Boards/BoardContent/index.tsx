@@ -1,8 +1,11 @@
 import Box from '@mui/material/Box'
 import type { IBoard } from '~/interfaces/Board'
+import { mapArrayToOrder } from '~/utils/sorts'
 import ListColumns from './components/ListColumns'
 
 function BoardContent({ board }: { board: IBoard }) {
+  const columns = mapArrayToOrder(board.columns, board.columnOrderIds, '_id')
+
   return (
     <Box
       sx={{
@@ -16,7 +19,7 @@ function BoardContent({ board }: { board: IBoard }) {
         py: 1,
       }}
     >
-      <ListColumns columns={board.columns} />
+      <ListColumns columns={columns} />
     </Box>
   )
 }

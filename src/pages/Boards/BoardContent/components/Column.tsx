@@ -17,14 +17,18 @@ import TextField from '@mui/material/TextField'
 import Tooltip from '@mui/material/Tooltip'
 import { useState } from 'react'
 import type { IColumn } from '~/interfaces/Column'
+import { mapArrayToOrder } from '~/utils/sorts'
 import ListCards from './ListCards'
 
 function Column({ column }: { column: IColumn }) {
+  const cards = mapArrayToOrder(column.cards, column.cardOrderIds, '_id')
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
+
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget)
   }
+
   const handleClose = () => {
     setAnchorEl(null)
   }
@@ -148,7 +152,7 @@ function Column({ column }: { column: IColumn }) {
         </Menu>
       </Box>
 
-      <ListCards cards={column.cards} />
+      <ListCards cards={cards} />
 
       <Box
         sx={{
