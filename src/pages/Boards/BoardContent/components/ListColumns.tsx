@@ -1,13 +1,16 @@
-import Box from '@mui/material/Box'
-import Column from './Column'
-import Button from '@mui/material/Button'
 import AddIcon from '@mui/icons-material/Add'
+import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
+import type { IColumn } from '~/interfaces/Column'
+import Column from './Column'
 
-function ListColumns() {
+function ListColumns({ columns }: { columns: IColumn[] }) {
   return (
     <>
-      <Column />
-      <Column />
+      {columns.map((column) => (
+        <Column key={column._id} column={column} />
+      ))}
+
       <Box
         sx={{
           minWidth: 300,

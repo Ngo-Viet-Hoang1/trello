@@ -16,9 +16,10 @@ import MenuItem from '@mui/material/MenuItem'
 import TextField from '@mui/material/TextField'
 import Tooltip from '@mui/material/Tooltip'
 import { useState } from 'react'
+import type { IColumn } from '~/interfaces/Column'
 import ListCards from './ListCards'
 
-function Column() {
+function Column({ column }: { column: IColumn }) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -78,10 +79,10 @@ function Column() {
               },
             },
           }}
-          value="To do"
+          value={column.title}
           inputProps={{
             style: {
-              width: `${Math.max(8, 'To do'.length)}ch`,
+              width: `${Math.max(8, column.title.length)}ch`,
             },
           }}
         />
@@ -147,7 +148,7 @@ function Column() {
         </Menu>
       </Box>
 
-      <ListCards />
+      <ListCards cards={column.cards} />
 
       <Box
         sx={{

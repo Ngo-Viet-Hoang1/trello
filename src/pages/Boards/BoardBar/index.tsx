@@ -1,14 +1,18 @@
+import LockIcon from '@mui/icons-material/Lock'
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt'
+import PublicIcon from '@mui/icons-material/Public'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
+import Tooltip from '@mui/material/Tooltip'
 import { useState } from 'react'
+import { capitalizeFirstLetter } from '~/utils/formatters'
 import Avatars from './Avatars'
 import Menus from './Menus'
 import Views from './Views'
 
-function BoardBar() {
-  const [boardTitle, setBoardTitle] = useState('Untitled')
+function BoardBar({ visibility = '' }: { visibility?: string }) {
+  const [boardTitle, setBoardTitle] = useState(visibility)
 
   return (
     <Box
@@ -62,6 +66,21 @@ function BoardBar() {
 
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
         <Avatars />
+
+        <Tooltip title="Change visibility">
+          <Button
+            size="small"
+            startIcon={
+              visibility === 'private' ? (
+                <LockIcon fontSize="small" />
+              ) : (
+                <PublicIcon fontSize="small" />
+              )
+            }
+          >
+            {capitalizeFirstLetter(visibility)}
+          </Button>
+        </Tooltip>
 
         <Button
           variant="contained"

@@ -7,8 +7,14 @@ import CardActions from '@mui/material/CardActions'
 import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
+import type ICard from '~/interfaces/Card'
 
-function Card() {
+function Card({ card }: { card: ICard }) {
+  const isShowCardActions =
+    card.memberIds?.length > 0 &&
+    card.comments?.length > 0 &&
+    card.attachments?.length > 0
+
   return (
     <TrelloCard
       sx={{
@@ -17,26 +23,42 @@ function Card() {
         overflow: 'unset',
       }}
     >
-      <CardMedia
-        component="img"
-        alt="green iguana"
-        height="140"
-        image="/static/images/cards/contemplative-reptile.jpg"
-      />
+      {card.cover && (
+        <CardMedia
+          component="img"
+          alt={card.title}
+          height="140"
+          image={card.cover}
+          sx={{
+            borderTopLeftRadius: 'inherit',
+            borderTopRightRadius: 'inherit',
+          }}
+        />
+      )}
+
       <CardContent sx={{ p: 1.5, '&:last-child': { pb: 1.5 } }}>
-        <Typography>Wizard</Typography>
+        <Typography>{card.title}</Typography>
       </CardContent>
-      <CardActions sx={{ p: '0 4px 8px 4px' }}>
-        <Button size="small" startIcon={<GroupIcon />}>
-          14
-        </Button>
-        <Button size="small" startIcon={<CommentIcon />}>
-          11
-        </Button>
-        <Button size="small" startIcon={<AttachFileIcon />}>
-          2020
-        </Button>
-      </CardActions>
+
+      {isShowCardActions && (
+        <CardActions sx={{ p: '0 4px 8px 4px' }}>
+          {card.memberIds?.length > 0 && (
+            <Button size="small" startIcon={<GroupIcon />}>
+              {card.memberIds.length}
+            </Button>
+          )}
+          {card.comments?.length > 0 && (
+            <Button size="small" startIcon={<CommentIcon />}>
+              {card.comments.length}
+            </Button>
+          )}
+          {card.attachments?.length > 0 && (
+            <Button size="small" startIcon={<AttachFileIcon />}>
+              {card.attachments.length}
+            </Button>
+          )}
+        </CardActions>
+      )}
     </TrelloCard>
   )
 }

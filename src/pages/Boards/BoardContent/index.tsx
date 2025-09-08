@@ -1,7 +1,8 @@
 import Box from '@mui/material/Box'
+import type { IBoard } from '~/interfaces/Board'
 import ListColumns from './components/ListColumns'
 
-function BoardContent() {
+function BoardContent({ board }: { board: IBoard }) {
   return (
     <Box
       sx={{
@@ -15,7 +16,7 @@ function BoardContent() {
         py: 1,
       }}
     >
-      <ListColumns />
+      <ListColumns columns={board.columns} />
     </Box>
   )
 }

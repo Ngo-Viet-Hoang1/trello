@@ -1,7 +1,8 @@
 import Box from '@mui/material/Box'
+import type ICard from '~/interfaces/Card'
 import Card from './Card'
 
-function ListCards() {
+function ListCards({ cards }: { cards: ICard[] }) {
   return (
     <Box
       sx={{
@@ -18,7 +19,9 @@ function ListCards() {
           } - ${theme.trello.columnFooterHeight})`,
       }}
     >
-      <Card />
+      {cards?.map((card) => (
+        <Card key={card._id} card={card} />
+      ))}
     </Box>
   )
 }
